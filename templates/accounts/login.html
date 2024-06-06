@@ -1,0 +1,41 @@
+<!-- Cargar la etiqueta static de Django -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    <link
+      rel="icon"
+      href="{% static 'images/Icono_SmarFood.png' %}"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo-container">
+        <img
+          src="{% static 'images/Icono_SmarFood.png' %}"
+          alt="Logo de Nutrición Saludable"
+          class="logo"
+        />
+        <h1>Nutrición Saludable</h1>
+      </div>
+      <nav></nav>
+    </header>
+
+    <section class="login-form">
+      <h2>Iniciar Sesión</h2>
+      <form method="POST">
+        {{form.as_p}} {% csrf_token %}
+        <button type="submit" value="Log in">Iniciar Sesión</button>
+      </form>
+    </section>
+
+    <footer>
+      <p>&copy; 2024 Nutrición Saludable. Todos los derechos reservados.</p>
+    </footer>
+  </body>
+</html>
