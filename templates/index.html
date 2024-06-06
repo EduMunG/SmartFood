@@ -1,0 +1,65 @@
+<!-- Cargar la etiqueta static de Django -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nutrición Saludable</title>
+
+    <!-- Referenciar los archivos estáticos usando el tag static -->
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link
+      rel="icon"
+      href="{% static 'images/Icono_SmarFood.png' %}"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo-container">
+        <img
+          src="{% static 'images/Icono_SmarFood.png' %}"
+          alt="Logo de Nutrición Saludable"
+          class="logo"
+        />
+        <h1>Nutrición Saludable</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="{% url 'login' %}">Log In</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h2>Bienvenido a Smart Food</h2>
+      <br />
+      <img src="{% static 'images/hero.png' %}" alt="Comida Saludable" />
+      <br />
+      <p>
+        Te presentamos nuestra aplicación de dieta personalizada, diseñada para
+        calcular tus necesidades calóricas y adaptarse a tus preferencias de
+        ingredientes.
+      </p>
+      <br />
+      <p>
+        Encuentra consejos, recetas y recursos para llevar una vida más
+        saludable.
+      </p>
+      <br />
+    </section>
+
+    <section class="about">
+      <h2>Sobre Nosotros</h2>
+      <p>
+        Somos un equipo de nutricionistas comprometidos con promover la salud y
+        el bienestar a través de una alimentación equilibrada y nutritiva.
+      </p>
+    </section>
+
+    <footer>
+      <p>&copy; 2024 Nutrición Saludable. Todos los derechos reservados.</p>
+    </footer>
+  </body>
+</html>
