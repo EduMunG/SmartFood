@@ -1,13 +1,12 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Smart Food</title>
+    <title>Mas de ti</title>
 
-    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/register.css' %}" />
     <link
       rel="icon"
       href="{% static 'images/Icono_SmarFood.png' %}"
@@ -24,21 +23,19 @@
         />
         <h1>Nutrición Saludable</h1>
       </div>
-      <nav>
-        <ul>
-          <li><a href="{% url 'logout' %}">Log out</a></li>
-        </ul>
-      </nav>
     </header>
 
-    <section class="content">
-      <div class="info_usuario">
-        <h2>Bienvenido {{user.username}}</h2>
-      </div>
+    <section class="register-form">
+      <h2>Cuéntanos un poco sobre ti</h2>
+      <p>
+        Por favor, comparte tus datos personales para personalizar tu dieta.
+      </p>
+      <br />
 
-      <div class="info_dieta">
-        <h2>Información de la Dieta</h2>
-      </div>
+      <form method="POST">
+        {{data_form.as_p}} {% csrf_token %}
+        <button type="submit">Crear Cuenta</button>
+      </form>
     </section>
 
     <footer>
