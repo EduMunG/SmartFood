@@ -2,47 +2,45 @@
 
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Food</title>
 
-    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
-    <link
-      rel="icon"
-      href="{% static 'images/Icono_SmarFood.png' %}"
-      type="image/x-icon"
-    />
-  </head>
-  <body>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="icon" href="{% static 'images/Icono_SmarFood.png' %}" type="image/x-icon">
+</head>
+<body>
     <header>
-      <div class="logo-container">
-        <img
-          src="{% static 'images/Icono_SmarFood.png' %}"
-          alt="Logo de Nutrición Saludable"
-          class="logo"
-        />
-        <h1>Nutrición Saludable</h1>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="{% url 'logout' %}">Log out</a></li>
-        </ul>
-      </nav>
+        <div class="logo-container">
+            <img src="{% static 'images/Icono_SmarFood.png' %}" alt="Logo de Nutrición Saludable" class="logo">
+            <h1>Nutrición Saludable</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'agregar_alimento' %}">Agregar</a></li>
+                <li><a href="{% url 'logout' %}">Log out</a></li>
+            </ul>
+        </nav>
     </header>
-
+    
     <section class="content">
-      <div class="info_usuario">
-        <h2>Bienvenido {{user.username}}</h2>
-      </div>
 
-      <div class="info_dieta">
-        <h2>Información de la Dieta</h2>
-      </div>
+        <div class="info_usuario">
+            <h2>Bienvenido a @Usuario</h2>
+  
+        </div>
+
+        <div class="info_dieta">
+            <h2>Información de la Dieta</h2>
+        </div>
+
     </section>
+    
 
     <footer>
-      <p>&copy; 2024 Nutrición Saludable. Todos los derechos reservados.</p>
+        <p>&copy; 2024 Nutrición Saludable. Todos los derechos reservados.</p>
     </footer>
-  </body>
+
+</body>
 </html>

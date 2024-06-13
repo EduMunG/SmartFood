@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Alimento</title>
+    <link rel="stylesheet" href="{% static 'css/buscador.css' %}">
+    <link rel="icon" href="{% static 'images/Icono_SmarFood.png' %}" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{% static 'images/Icono_SmarFood.png' %}" alt="Logo de Nutrición Saludable" class="logo">
+            <h1>Nutrición Saludable</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'agregar_alimento' %}">Regresar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="buscador">
+        <form method="GET" action="{% url 'buscar_alimento' %}">
+            <input type="text" name="query" placeholder="Ingrese el alimento..." value="{{ query }}">
+            <button type="submit">Buscar</button>
+        </form>
+    </section>
+
+    <section class="resultados">
+        {% if resultados %}
+            <h2>Resultados de la búsqueda:</h2>
+            <ul>
+                {% for resultado in resultados %}
+                    <li>{{ resultado.name }} - {{ resultado.energ_kal }} kcal
+                        <form method="POST" action="{% url 'buscar_alimento' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="name" value="{{ resultado.name }}">
+                            <button type="submit">Agregar</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            {% if query %}
+                <p>No se encontraron resultados para "{{ query }}".</p>
+            {% endif %}
+        {% endif %}
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Nutrición Saludable. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

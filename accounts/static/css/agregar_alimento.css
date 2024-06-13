@@ -1,0 +1,118 @@
+body {
+    font-family: "Arial", sans-serif;
+    background-color: #c9e0de;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #cff3d3;
+    padding: 20px;
+    color: #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 50px;
+    margin-right: 15px;
+}
+
+header h1 {
+    font-size: 2em;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000000;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #e4c79b;
+    color: #fff;
+}
+
+.menu {
+    background-color: #d3eddc;
+    padding: 40px;
+    margin: 10px auto;
+    width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.menu h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.meal-option {
+    margin-bottom: 20px;
+    flex: 1 0px;
+}
+
+.meal-option p {
+    font-size: 17px;
+    margin: 0;
+}
+
+.add-btn {
+    text-decoration: none;
+    background-color: #013f18;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+    text-decoration: none !important;
+}
+
+.add-btn:hover {
+    background-color: #e4c79b;
+}
+
+.selected-foods {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.selected-foods ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.selected-foods li {
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #013f18;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto;
+}
