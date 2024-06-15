@@ -29,7 +29,7 @@
     </div>
     
     <section class="content">
-    <div class="contenido-a-borrar">   
+
         <div class="info_dieta">
             <h2>Registro Diario</h2>
             <br>
@@ -46,18 +46,19 @@
             {% endif %}
   
       </div>
-  
+
         <div class="info_dieta">
           <h2>Información de la Dieta</h2>
-          <br>
+            <br>
           <h3>Consumo Diario:</h3>
-          <br>
-          <ul>
-              <li>Calorías Totales: {{ total_calorias }} kcal</li>
-              <li>Proteínas Totales: {{ total_proteinas }} g</li>
-              <li>Grasas Totales: {{ total_grasas }} g</li>
-              <li>Carbohidratos Totales: {{ total_carbohidratos }} g</li>
-          </ul>
+            <br>
+            <ul>
+                <li>Calorías Totales: {{ total_calorias }} kcal</li>
+                <li>Proteínas Totales: {{ total_proteinas }} g</li>
+                <li>Grasas Totales: {{ total_grasas }} g</li>
+                <li>Carbohidratos Totales: {{ total_carbohidratos }} g</li>
+            </ul>
+
           <form method="POST">
               {% csrf_token %}
               <button type="submit" name="save">Guardar Consumo</button>
@@ -65,7 +66,7 @@
 
           </form>
         </div>
-    </div>     
+             
       </section>
 
 
@@ -74,6 +75,6 @@
         <p>&copy; 2024 Nutrición Saludable. Todos los derechos reservados.</p>
     </footer>
 
-    <script src="{% static 'js/consumo.js' %}"></script>
+    <script src="{% static 'js/funciones.js' %}"></script>
 </body>
 </html>
