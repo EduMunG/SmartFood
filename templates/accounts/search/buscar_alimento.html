@@ -23,8 +23,9 @@
     </header>
 
     <section class="buscador">
-        <form method="GET" action="{% url 'buscar_alimento' %}">
-            <input type="text" name="query" placeholder="Ingrese el alimento..." value="{{ query }}">
+        <h2>Buscador de Alimentos para {{ meal_type }}</h2>
+        <form action="{% url 'buscar_alimento' %}" method="GET">
+            <input type="text" name="query" value="{{ query }}" placeholder="Ingrese el alimento...">
             <button type="submit">Buscar</button>
         </form>
     </section>

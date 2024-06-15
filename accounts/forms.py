@@ -26,3 +26,10 @@ class takeDataUser(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['fa', 'kg', 'edad', 'objetivo']
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['fa', 'kg', 'edad', 'objetivo']
+        

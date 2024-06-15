@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Alimento</title>
+   
     <link rel="stylesheet" href="{% static 'css/agregar_alimento.css' %}">
     <link rel="icon" href="{% static 'images/Icono_SmarFood.png' %}" type="image/x-icon">
 </head>
@@ -17,7 +18,7 @@
         </div>
         <nav>
             <ul>
-                <li><a href="{% url 'home' %}">Listo</a></li>
+                <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
             </ul>
         </nav>
     </header>
@@ -25,87 +26,26 @@
     <section class="menu">
         <h2>¿Deseas agregar un alimento a tus comidas?</h2>
         <br>
-
+    
         <div class="meal-option">
             <p>Desayuno</p>
-            <a href="{% url 'buscar_alimento' %}" class="add-btn">+</a>
-            <div class="selected-foods">
-                {% if selected_foods %}
-                    <h2>Alimentos Seleccionados:</h2>
-                    <ul>
-                        {% for alimento in selected_foods %}
-                            <li>{{ alimento.name }} - {{ alimento.energ_kal }} kcal</li>
-                        {% endfor %}
-                    </ul>
-    
-                    <form method="POST" action="{% url 'agregar_alimento' %}">
-                        {% csrf_token %}
-                        <button type="submit" name="save">Guardar</button>
-                    </form>
-                {% endif %}
-            </div>
+            <a href="{% url 'buscar_alimento' %}?meal=desayuno" class="add-btn">+</a>
         </div>
         
         <div class="meal-option">
             <p>Colación</p>
-            <a href="{% url 'buscar_alimento' %}" class="add-btn">+</a>
-            <div class="selected-foods">
-                {% if selected_foods %}
-                    <h2>Alimentos Seleccionados:</h2>
-                    <ul>
-                        {% for alimento in selected_foods %}
-                            <li>{{ alimento.name }} - {{ alimento.energ_kal }} kcal</li>
-                        {% endfor %}
-                    </ul>
-    
-                    <form method="POST" action="{% url 'agregar_alimento' %}">
-                        {% csrf_token %}
-                        <button type="submit" name="save">Guardar</button>
-                    </form>
-                {% endif %}
-            </div>
+            <a href="{% url 'buscar_alimento' %}?meal=colacion" class="add-btn">+</a>
         </div>
         <div class="meal-option">
             <p>Comida</p>
-            <a href="{% url 'buscar_alimento' %}" class="add-btn">+</a>
-            <div class="selected-foods">
-                {% if selected_foods %}
-                    <h2>Alimentos Seleccionados:</h2>
-                    <ul>
-                        {% for alimento in selected_foods %}
-                            <li>{{ alimento.name }} - {{ alimento.energ_kal }} kcal</li>
-                        {% endfor %}
-                    </ul>
-    
-                    <form method="POST" action="{% url 'agregar_alimento' %}">
-                        {% csrf_token %}
-                        <button type="submit" name="save">Guardar</button>
-                    </form>
-                {% endif %}
-            </div>
+            <a href="{% url 'buscar_alimento' %}?meal=comida" class="add-btn">+</a>
         </div>
         <div class="meal-option">
             <p>Cena</p>
-            <a href="{% url 'buscar_alimento' %}" class="add-btn">+</a>
-            <div class="selected-foods">
-                {% if selected_foods %}
-                    <h2>Alimentos Seleccionados:</h2>
-                    <ul>
-                        {% for alimento in selected_foods %}
-                            <li>{{ alimento.name }} - {{ alimento.energ_kal }} kcal</li>
-                        {% endfor %}
-                    </ul>
-    
-                    <form method="POST" action="{% url 'agregar_alimento' %}">
-                        {% csrf_token %}
-                        <button type="submit" name="save">Guardar</button>
-                    </form>
-                {% endif %}
-            </div>
+            <a href="{% url 'buscar_alimento' %}?meal=cena" class="add-btn">+</a>
         </div>
-
-
     </section>
+    
 
     <footer>
         <p>&copy; 2024 Nutrición Saludable. Todos los derechos reservados.</p>
@@ -113,3 +53,4 @@
 
 </body>
 </html>
+

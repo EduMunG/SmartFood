@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Diario</title>
+   
+    <link rel="stylesheet" href="{% static 'css/consumos.css' %}">
+    <link rel="icon" href="{% static 'images/Icono_SmarFood.png' %}" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{% static 'images/Icono_SmarFood.png' %}" alt="Logo de Nutrición Saludable" class="logo">
+            <h1>Nutrición Saludable</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    <br>
+    <div class="fecha">
+        
+        <h2>Registro Diario - <span id="fecha">{{ date }}</span></h2>
+    </div>
+    
+    <section class="content">
+        <div class="info_dieta">
+            <h2>Registro Diario</h2>
+            <br>
+            {% if selected_foods %}
+                <h3>Alimentos Seleccionados:</h3>
+                <br>
+                <ul>
+                    {% for alimento in selected_foods %}
+                        <li>{{ alimento.name }} - {{ alimento.energ_kal }} kcal</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No hay alimentos seleccionados.</p>
+            {% endif %}
+  
+      </div>
+  
+        <div class="info_dieta">
+          <h2>Información de la Dieta</h2>
+          <br>
+          <h3>Consumo Diario:</h3>
+          <br>
+          <ul>
+              <li>Calorías Totales: {{ total_calorias }} kcal</li>
+              <li>Proteínas Totales: {{ total_proteinas }} g</li>
+              <li>Grasas Totales: {{ total_grasas }} g</li>
+              <li>Carbohidratos Totales: {{ total_carbohidratos }} g</li>
+          </ul>
+          <form method="POST">
+              {% csrf_token %}
+              <button type="submit" name="save">Guardar Consumo</button>
+              <a href="{% url 'agregar_alimento' %}" class="button-modificar">Agregra Alimento</a>
+
+          </form>
+        </div>
+      </section>
+
+
+    
+    <footer>
+        <p>&copy; 2024 Nutrición Saludable. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="{% static 'js/consumo.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+    /* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Estilos generales */
+  body {
+    font-family: "Arial", sans-serif; /* Cambia el tipo de letra */
+    background-color: #c9e0de; /* Color de fondo suave */
+    color: #000000; /* Color de texto principal */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  header {
+    background-color: #cff3d3; /* Verde */
+    padding: 20px;
+    color: #000000; /* Color de texto en el encabezado */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 50px; /* Ajusta este valor según el tamaño de tu logo */
+    margin-right: 15px;
+  }
+  
+  header h1 {
+    font-size: 2em;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    display: flex; /* Para que los elementos se alineen en una fila */
+  }
+  
+  nav ul li {
+    margin-right: 20px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #000000;
+    padding: 10px 15px; /* Espaciado interno para hacer los enlaces más clicables */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Transición suave para el efecto hover */
+  }
+  
+  nav ul li a:hover {
+    background-color: #e4c79b; /* Color de fondo al pasar el ratón */
+    color: #fff; /* Cambia el color del texto al pasar el ratón */
+  }
+  
+  /* Estilos del formulario de inicio de sesión */
+  .login-form {
+    background-color: #d3eddc; /* Fondo de la sección */
+    padding: 50px;
+    margin: 20px auto;
+    width: 300px; /* Ancho del formulario */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+    text-align: center;
+    flex: 1;
+  }
+  
+  .login-form h2 {
+    margin-bottom: 20px;
+    color: #000000;
+  }
+  
+  .login-form form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-form label {
+    margin-bottom: 5px;
+    color: #000000;
+    text-align: left;
+  }
+  
+  .login-form input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .login-form button {
+    padding: 10px;
+    background-color: #5adbac; /* Color del botón */
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .login-form button:hover {
+    background-color: #45aeb1; /* Color del botón al pasar el ratón */
+  }
+  
+  footer {
+    background-color: #013f18;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto; /* Hace que el footer esté siempre al final de la página */
+  }
+  
