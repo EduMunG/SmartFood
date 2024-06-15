@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
 from accounts.models import Food, DailyIntake
+from django.db.models import F
+from django.contrib import messages
 from . import forms
 
 
@@ -46,27 +48,30 @@ def home(request):
 @login_required
 def agregar_alimento(request):
     selected_foods = request.session.get('selected_foods', [])
-    alimentos = Food.objects.filter(name=selected_foods)
+    alimentos = Food.objects.filter(name__in=selected_foods)
     
     if request.method == 'POST' and 'save' in request.POST:
         user = request.user
-        daily_intake, created = DailyIntake.objects.get_or_create(user=user, date=datetime.date.today())
+        daily_intake, created = DailyIntake.objects.get_or_create(user=user, date=datetime.date.today(), defaults={'calories': 0, 'proteins': 0, 'fats': 0, 'carbohydrates': 0})
         
         for food in alimentos:
-            daily_intake.foods.add(food)
-            daily_intake.calories += food.energ_kal
+            daily_intake.calories = F('calories') + food.energ_kal
+            daily_intake.proteins = F('proteins') + food.proteina
+            daily_intake.fats = F('fats') + food.lipid_tot
+            daily_intake.carbohydrates = F('carbohydrates') + food.carbohydrt
         daily_intake.save()
+        daily_intake.refresh_from_db()
 
         # Limpiar la selección después de guardar
         request.session['selected_foods'] = []
+        messages.success(request, 'Alimentos guardados correctamente.')
 
-        return redirect('home')
 
     context = {
-        'alimentos': alimentos,
+        'alimentos': selected_foods,
+        'selected_foods': alimentos,
     }
     return render(request, 'accounts/search/agregar_alimento.html', context)
-
 
 
 @login_required
@@ -79,21 +84,21 @@ def buscar_alimento(request):
 
     if request.method == 'POST':
         food_id = request.POST.get('name')
-        if food_id:
-            food = Food.objects.get(name=food_id)
-            selected_foods = request.session.get('selected_foods', [])
-            if food.name not in selected_foods:
-                selected_foods.append(food.name)
-            request.session['selected_foods'] = selected_foods
 
-            return redirect('buscar_alimento')
+        if 'selected_foods' not in request.session:
+            request.session['selected_foods'] = []
+        
+        request.session['selected_foods'].append(food_id)
+        request.session.modified = True
+
+        return redirect('agregar_alimento')
+    
 
     context = {
         'resultados': resultados,
         'query': query,
     }
     return render(request, 'accounts/search/buscar_alimento.html', context)
-
 
 
 def logout(request):

@@ -35,7 +35,7 @@
             <ul>
                 {% for resultado in resultados %}
                     <li>{{ resultado.name }} - {{ resultado.energ_kal }} kcal
-                        <form method="POST" action="{% url 'buscar_alimento' %}">
+                        <form method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="name" value="{{ resultado.name }}">
                             <button type="submit">Agregar</button>

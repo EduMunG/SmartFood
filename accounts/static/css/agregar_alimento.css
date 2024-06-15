@@ -51,7 +51,6 @@ nav ul li a:hover {
     background-color: #e4c79b;
     color: #fff;
 }
-
 .menu {
     background-color: #d3eddc;
     padding: 40px;
@@ -60,10 +59,6 @@ nav ul li a:hover {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 8%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
 }
 
 .menu h2 {
@@ -74,25 +69,13 @@ nav ul li a:hover {
 .meal-option {
     margin-bottom: 20px;
     flex: 1 0px;
+    display: flex;
+    align-items: center;
 }
 
 .meal-option p {
     font-size: 17px;
     margin: 0;
-}
-
-.add-btn {
-    text-decoration: none;
-    background-color: #013f18;
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 10px;
-    transition: background-color 0.3s;
-    text-decoration: none !important;
-}
-
-.add-btn:hover {
-    background-color: #e4c79b;
 }
 
 .selected-foods {
@@ -107,6 +90,20 @@ nav ul li a:hover {
 
 .selected-foods li {
     margin-bottom: 10px;
+}
+
+.add-btn {
+    text-decoration: none;
+    background-color: #013f18;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+    text-decoration: none !important;
+}
+
+.add-btn:hover {
+    background-color: #e4c79b;
 }
 
 footer {
