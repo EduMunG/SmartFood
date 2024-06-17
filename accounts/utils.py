@@ -65,7 +65,7 @@ def make_meal(user):
     #for i in colacion:
     best_colacion.append(Food.objects.filter(index__in=colacion).values_list('name', flat=True))
     
-    comida = genetic([goal.daily_calories, goal.fat_percentage, goal.carbohydrate_percentage, goal.protein_percentage], 2, 1000, 0.8, 0.4, 100)
+    comida = genetic([goal.daily_calories, goal.fat_percentage, goal.carbohydrate_percentage, goal.protein_percentage], 3, 1000, 0.8, 0.4, 100)
     #for i in comida:
     best_comida.append(Food.objects.filter(index__in=comida).values_list('name', flat=True))
     
