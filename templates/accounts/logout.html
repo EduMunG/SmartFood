@@ -17,11 +17,13 @@
   <body>
     <header>
       <div class="logo-container">
-        <img
-          src="{% static 'images/Icono_SmarFood.png' %}"
-          alt="Logo de Nutrición Saludable"
-          class="logo"
-        />
+        <a href="{% url 'main:core' %}">
+          <img
+              src="{% static 'images/Icono_SmarFood.png' %}"
+              alt="Logo de Nutrición Saludable"
+              class="logo"
+          />
+      </a>      
         <h1>Nutrición Saludable</h1>
       </div>
       <nav>
