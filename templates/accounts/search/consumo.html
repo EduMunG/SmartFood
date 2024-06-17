@@ -18,7 +18,7 @@
         </div>
         <nav>
             <ul>
-                <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+                <li><a href="{% url 'buscar_alimento' %}">Regresar</a></li>
             </ul>
         </nav>
     </header>
@@ -61,8 +61,9 @@
 
           <form method="POST">
               {% csrf_token %}
+              <button type="submit" name="clear"> Cancelar </button>
               <button type="submit" name="save">Guardar Consumo</button>
-              <a href="{% url 'agregar_alimento' %}" class="button-modificar">Agregra Alimento</a>
+              <a href="{% url 'agregar_alimento' %}" class="button-modificar">Agregrar otro Alimento</a>
 
           </form>
         </div>

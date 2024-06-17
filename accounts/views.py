@@ -8,14 +8,18 @@ from accounts.models import Food, DailyIntake
 from django.db.models import F
 from django.contrib import messages
 from . import forms
-from .models import UserProfile
+from .models import Goal, UserProfile
 from .forms import UserProfileForm
 from django.db.models import Sum
+from .genetic_algorithm import *
+from .utils import make_meal, actualizarmeta
+from django.views.decorators.csrf import csrf_protect
 
 
 
 
 
+@csrf_protect
 def user_login(request):
     if request.method == 'POST':
         form = forms.LoginForm(request.POST)
@@ -37,63 +41,32 @@ def user_login(request):
 
     return render(request, 'accounts/login.html', {'form': form})
 
-
+@login_required
 def home(request):
-    if request.user.is_authenticated:
-        user = request.user
-        # Obtener el perfil del usuario
-        user_profile = get_object_or_404(UserProfile, user=user)
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
+
+    if request.method == 'GET':
+        desayuno, colacion, comida, cena = make_meal(user)
         # Pasar los datos del perfil al contexto
         context = {
             'user': user,
             'fa': user_profile.fa,
             'kg': user_profile.kg,
             'edad': user_profile.edad,
+            'Estatura': user_profile.cm,
             'objetivo': user_profile.objetivo,
+            'desayuno': desayuno,
+            'colacion': colacion,
+            'comida': comida,
+            'cena': cena,
         }
-        return render(request, 'accounts/home.html', context)
-    else:
-        return redirect('login')
 
+    return render(request, 'accounts/home.html', context)
 
- 
 
 @login_required
 def agregar_alimento(request):
-    if request.method == 'POST' and 'save' in request.POST:
-        selected_foods = request.session.get('selected_foods', [])
-
-        user = request.user
-        # Obtener o crear el registro de consumo diario para el usuario y la fecha actual
-        daily_intake, created = DailyIntake.objects.get_or_create(
-            user=user,
-            date=datetime.date.today(),
-            defaults={'calories': 0, 'proteins': 0, 'fats': 0, 'carbohydrates': 0}
-        )
-        
-        # Filtrar los alimentos seleccionados desde la base de datos
-        alimentos = Food.objects.filter(name__in=selected_foods)
-
-        # Actualizar el consumo diario con los nutrientes de los alimentos seleccionados
-        for food in alimentos:
-            daily_intake.calories = F('calories') + food.energ_kal
-            daily_intake.proteins = F('proteins') + food.proteina
-            daily_intake.fats = F('fats') + food.lipid_tot
-            daily_intake.carbohydrates = F('carbohydrates') + food.carbohydrt
-        
-        # Guardar los cambios en el registro de consumo diario
-        daily_intake.save()
-        daily_intake.refresh_from_db()
-
-        # Limpiar la selección después de guardar
-        request.session['selected_foods'] = []
-        messages.success(request, 'Alimentos guardados correctamente.')
-
-        return redirect('consumo')  # Redirigir a la página de consumo después de guardar
-
-    else:
-        messages.error(request, 'No se pudo guardar los alimentos.')
-
     return render(request, 'accounts/search/agregar_alimento.html')
 
 @login_required
@@ -163,26 +136,38 @@ def takeData(request):
             print(user_profile.user.username)
             user_profile.save()
             print('User profile data saved successfully.')
+            actualizarmeta(request)  # Call the actualizarmeta function
             return render(request, 'accounts/register_done.html', {'data_form': data_form})
     else:
         data_form = forms.takeDataUser()
 
     return render(request, 'accounts/takeData.html', {'data_form': data_form})
-    
 
+
+
+
+@login_required
 def cambiar_inf(request):
     user_profile = request.user.userprofile
+    _ = Goal.objects.get_or_create(
+        user=request.user,
+        defaults={'daily_calories': 0, 'protein_percentage': 0, 'carbohydrate_percentage': 0, 'fat_percentage': 0})
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=user_profile)
         if form.is_valid():
             form.save()
-            return redirect('home')  # Redirige a la URL con nombre 'home'
+            actualizarmeta(request.user)  # Call the actualizarmeta function with the user instance
+            return redirect('home')  # Redirect to the URL with name 'home'
     else:
         form = UserProfileForm(instance=user_profile)
     return render(request, 'accounts/cambiar_inf.html', {'form': form})
 
 
 
+
+
+
+    
 @login_required
 def consumo(request):
     selected_foods = request.session.get('selected_foods', [])
@@ -194,6 +179,45 @@ def consumo(request):
     total_grasas = alimentos.aggregate(Sum('lipid_tot'))['lipid_tot__sum'] or 0
     total_carbohidratos = alimentos.aggregate(Sum('carbohydrt'))['carbohydrt__sum'] or 0
 
+    # Limpiar la selección de alimentos
+    if request.method == 'POST' and 'clear' in request.POST:
+        if 'clear' in request.POST:
+            request.session['selected_foods'] = []
+            request.session.modified = True
+            messages.success(request, 'Selección de alimentos eliminada.')
+            return redirect('consumo')
+        
+    # Guardar el consumo diario
+    if request.method == 'POST' and 'save' in request.POST:
+        user = request.user
+        # Obtener o crear el registro de consumo diario para el usuario y la fecha actual
+        daily_intake, created = DailyIntake.objects.get_or_create(
+            user=user,
+            date=datetime.date.today(),
+            defaults={'calories': 0, 'proteins': 0, 'fats': 0, 'carbohydrates': 0}
+        )
+        
+        # Filtrar los alimentos seleccionados desde la base de datos
+        alimentos = Food.objects.filter(name__in=selected_foods)
+
+        # Actualizar el consumo diario con los nutrientes de los alimentos seleccionados
+        for food in alimentos:
+            daily_intake.calories = F('calories') + food.energ_kal
+            daily_intake.proteins = F('proteins') + food.proteina
+            daily_intake.fats = F('fats') + food.lipid_tot
+            daily_intake.carbohydrates = F('carbohydrates') + food.carbohydrt
+        
+        # Guardar los cambios en el registro de consumo diario
+        daily_intake.save()
+        daily_intake.refresh_from_db()
+
+        # Limpiar la selección después de guardar
+        request.session['selected_foods'] = []
+        messages.success(request, 'Alimentos guardados correctamente.')
+
+        return redirect('consumo')
+         
+
     context = {
         'selected_foods': alimentos,
         'total_calorias': total_calorias,
@@ -202,3 +226,7 @@ def consumo(request):
         'total_carbohidratos': total_carbohidratos,
     }
     return render(request, 'accounts/search/consumo.html', context)
+
+
+
+

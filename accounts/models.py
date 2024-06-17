@@ -2,11 +2,11 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 # Create your models here.
-
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     fa = models.FloatField()
     kg = models.FloatField()
+    cm = models.FloatField(default=0.0)
     edad = models.IntegerField()
     objetivo = models.CharField(max_length=100)
     def __str__(self):
@@ -20,12 +20,6 @@ class Goal(models.Model):
     carbohydrate_percentage = models.FloatField()
     fat_percentage = models.FloatField()
 
-class MealPlan(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    day = models.CharField(max_length=10)
-    breakfast = models.CharField(max_length=100)
-    lunch = models.CharField(max_length=100)
-    dinner = models.CharField(max_length=100)
 
 class Food(models.Model):
     index = models.IntegerField(primary_key=True, serialize=True)
@@ -39,6 +33,8 @@ class Food(models.Model):
 
     def __str__(self):
         return f"Food {self.index} - {self.energ_kal} kcal - {self.group} grupo - {self.lipid_tot} lipidos - {self.carbohydrt} carbohidratos - {self.proteina} proteina - Nombre:{self.name} "
+    
+
 
 class DailyIntake(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -51,3 +47,11 @@ class DailyIntake(models.Model):
 
     def __str__(self):
         return f"{self.user.username} intake on {self.date}"
+    
+
+class MealPlan(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    day = models.CharField(max_length=10)
+    breakfast = models.ForeignKey(DailyIntake, on_delete=models.CASCADE, related_name='breakfast_mealplan')
+    lunch = models.ForeignKey(DailyIntake, on_delete=models.CASCADE, related_name='lunch_mealplan')
+    dinner = models.ForeignKey(DailyIntake, on_delete=models.CASCADE, related_name='dinner_mealplan')
