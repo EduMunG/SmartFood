@@ -202,3 +202,8 @@ def consumo(request):
         'total_carbohidratos': total_carbohidratos,
     }
     return render(request, 'accounts/search/consumo.html', context)
+
+def info(request):
+    return render(request, 'accounts/info.html')
+
+

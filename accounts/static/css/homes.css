@@ -82,6 +82,7 @@ footer {
 }
 
 .info_usuario {
+  overflow-y: auto; 
   background-color: #c0ece5;
   width: 30%;
   min-height: 300px;

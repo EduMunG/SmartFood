@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Diario</title>
+   
+    <link rel="stylesheet" href="{% static 'css/info.css' %}">
+    <link rel="icon" href="{% static 'images/Icono_SmarFood.png' %}" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{% static 'images/Icono_SmarFood.png' %}" alt="Logo de Nutrición Saludable" class="logo">
+            <h1>Informacion Saludable</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="que-es" class="content">
+        <h2>¿Qué es una Caloría?</h2>
+        <p>Las calorías miden la energía que nos proporciona un alimento o una bebida a partir de los carbohidratos, las grasas, las proteínas y el alcohol que contienen.</p>
+        <p>Nuestro cuerpo utiliza estas calorías en diferentes procesos como la producción de calor o para almacenarlas en forma de grasa.</p>
+        <p>El término 'caloría' fue inventado por el físico y químico Nicolas Clément en el siglo XIX.</p>
+    </section>
+
+    <section id="cuantas-consumir" class="content">
+        <h2>¿Cuántas Calorías Debo Consumir?</h2>
+        <p>La cantidad de calorías que debes consumir diariamente depende de factores como tu edad, estatura, sexo, nivel de actividad física y calidad de los alimentos consumidos.</p>
+        <p>Para determinar tu necesidad calórica diaria, considera el tipo de actividad física que realizas a diario. Puedes utilizar calculadores disponibles para obtener un estimado de tus necesidades calóricas.</p>
+    </section>
+
+    <section id="distribucion" class="content">
+        <h2>Distribución Recomendada de Calorías Diarias</h2>
+        <p>La distribución de las calorías diarias recomendadas varía según las comidas del día y la proporción de macronutrientes:</p>
+        <ul>
+            <li>Desayuno: 25% de las calorías diarias</li>
+            <li>Comida: 30-40% de las calorías diarias</li>
+            <li>2 Colaciones: 10-15% repartidas en los dos momentos del día</li>
+            <li>Cena: 20% de las calorías diarias</li>
+        </ul>
+        <p>Además, se aconseja la siguiente distribución de macronutrientes:</p>
+        <ul>
+            <li>Hidratos de Carbono: 50-60% del total de alimentos consumidos</li>
+            <li>Proteína: 15-20% del total de alimentos consumidos</li>
+            <li>Grasas: 15-30% del total de alimentos consumidos</li>
+        </ul>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2024 Nutrición Saludable. Todos los derechos reservados.</p>
+    </footer>
+
+    
+</body>
+</html>
