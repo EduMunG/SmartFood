@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Food</title>
 
-    <link rel="stylesheet" href="{% static 'css/homes.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
     <link
       rel="icon"
       href="{% static 'images/Icono_SmarFood.png' %}"
@@ -44,9 +44,51 @@
 
     </div>
 
-      <div class="info_dieta">
-        <h2>Información de la Dieta</h2>
-      </div>
+    <div class="info_dieta">
+      <h2>Información de la Dieta</h2>
+      <br>
+      <h4>Desayuno:</h4>
+      <ul>
+        {% for food in desayuno %}
+          <li>
+            <strong>{{ food.name }}</strong> -
+            Proteínas: {{ food.proteina }}, Carbohidratos: {{ food.carbohydrt }}, Grasas: {{ food.lipid_tot }},g Calaorias: {{ food.energ_kal}}
+          </li>
+        {% endfor %}
+      </ul>
+
+      <h4>Colacion:</h4>
+      <ul>
+        {% for food in colacion %}
+          <li>
+            <strong>{{ food.name }}</strong> -
+            Proteínas: {{ food.proteina }}, Carbohidratos: {{ food.carbohydrt }}, Grasas: {{ food.lipid_tot }},g Calaorias: {{ food.energ_kal}}
+          </li>
+        {% endfor %}
+      </ul>
+
+      <h4>Comida:</h4>
+      <ul>
+        {% for food in comida %}
+          <li>
+            <strong>{{ food.name }}</strong> -
+            Proteínas: {{ food.proteina }}, Carbohidratos: {{ food.carbohydrt }}, Grasas: {{ food.lipid_tot }},g Calaorias: {{ food.energ_kal}}
+          </li>
+        {% endfor %}
+      </ul>
+
+      <h4>Cena:</h4>
+      <ul>
+        {% for food in cena %}
+          <li>
+            <strong>{{ food.name }}</strong> -
+            Proteínas: {{ food.proteina }}, Carbohidratos: {{ food.carbohydrt }}, Grasas: {{ food.lipid_tot }},g Calaorias: {{ food.energ_kal}}
+          </li>
+        {% endfor %}
+      </ul>
+
+    </div>
+    
     </section>
 
     <footer>

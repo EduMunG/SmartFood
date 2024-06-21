@@ -107,6 +107,24 @@ footer {
   line-height: 1.9;
 }
 
+
+.info_dieta ul {
+  margin: 10px 0;
+}
+
+.info_dieta ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.info_dieta ul li {
+  background-color: #9eedc344;
+  border: 1px solid #1ef08044;
+  margin: 5px 0;
+  padding: 10px;  
+}
+
+
 .info_usuario p span {
   font-weight: bold;
 }

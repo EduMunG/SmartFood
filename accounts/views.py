@@ -11,6 +11,8 @@ from . import forms
 from .models import UserProfile
 from .forms import UserProfileForm
 from django.db.models import Sum
+from .import test,entradaGenetico,utility
+
 
 
 
@@ -37,19 +39,26 @@ def user_login(request):
 
     return render(request, 'accounts/login.html', {'form': form})
 
-
+@login_required
 def home(request):
     if request.user.is_authenticated:
         user = request.user
         # Obtener el perfil del usuario
         user_profile = get_object_or_404(UserProfile, user=user)
         # Pasar los datos del perfil al contexto
+        meals = make_meal(user_profile)
+
         context = {
             'user': user,
             'fa': user_profile.fa,
             'kg': user_profile.kg,
             'edad': user_profile.edad,
             'objetivo': user_profile.objetivo,
+            'desayuno': meals[0],
+            'colacion':meals[1],
+            'comida': meals[2],
+            'cena': meals[3],
+
         }
         return render(request, 'accounts/home.html', context)
     else:
@@ -206,4 +215,31 @@ def consumo(request):
 def info(request):
     return render(request, 'accounts/info.html')
 
+
+def make_meal(user):
+    bets_foods = []
+
+    desayuno, colacion, comida ,cena = entradaGenetico.get_vectores_Desayuno_Comida_Colacion_Cena(user.kg,user.fa, user.objetivo)
+
+    vectores = [desayuno, colacion, comida, cena]
+    num_meals = [4,3,3,3]
+
+    for comidas,num_meal in zip(vectores, num_meals):
+
+        indexes = test.genetic(comidas,num_meal,100,0.9,0.5,100)
+        print("Indezzz",indexes)
+        # Convertir la lista de índices a un QuerySet
+
+        foods_info = Food.objects.filter(index__in=indexes).values('name', 'energ_kal', 'carbohydrt', 'lipid_tot','proteina')
+
+         # Iterar sobre cada diccionario para imprimir la proteina
+        for food in foods_info:
+            print("Proteina:", food['proteina'])
+
+        bets_foods.append(foods_info)
+
+        #bets_foods.append(Food.objects.filter(index__in=indexes))
+    
+
+    return bets_foods
 
