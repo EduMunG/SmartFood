@@ -33,18 +33,42 @@ conn.commit()
 conn.close()
 
 
+# # Borrar alimento
 # import sqlite3
 
 # # Conectar a la base de datos
 # conn = sqlite3.connect('db.sqlite3')
 # cursor = conn.cursor()
 
-# # Borrar el registro con index = 4
+# # Borrar el registro con index 
 # sql_delete = '''
 #     DELETE FROM accounts_food
 #     WHERE "index" = ?
 # '''
-# cursor.execute(sql_delete, (428,))
+# cursor.execute(sql_delete, (217,))
+
+# # Confirmar la transacción
+# conn.commit()
+
+# # Cerrar la conexión
+# conn.close()
+
+
+
+
+# # Borrar Grupo
+# import sqlite3
+
+# # Conectar a la base de datos
+# conn = sqlite3.connect('db.sqlite3')
+# cursor = conn.cursor()
+
+# # Borrar todos los registros del grupo 17
+# sql_delete = '''
+#     DELETE FROM accounts_food
+#     WHERE "group" = ?
+# '''
+# cursor.execute(sql_delete, (19,))
 
 # # Confirmar la transacción
 # conn.commit()

@@ -19,7 +19,7 @@ def objective_Function(objectiveVector, individual):
 def initialize_Population(tamPopulation, num_meals, objectiveVector):
     population = []
     for _ in range(tamPopulation):
-        individual = [random.randint(1, 1710) for _ in range(num_meals)]
+        individual = [random.randint(1, 1463) for _ in range(num_meals)]
         vector = t(individual)
         fitness = objective_Function(objectiveVector, vector)
         population.append([individual, fitness])
@@ -61,7 +61,7 @@ def mutation(sons, probMutation):
     for son in sons:
         for i in range(len(son[0])):
             if random.uniform(0, 1) < probMutation:
-                son[0][i] = random.randint(1, 1710)
+                son[0][i] = random.randint(1, 1463)
 
 
 ### Elitism ###
