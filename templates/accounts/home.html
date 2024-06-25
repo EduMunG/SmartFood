@@ -45,6 +45,7 @@
     </div>
 
     <div class="info_dieta">
+     
       <h2>Información de la Dieta</h2>
       <br>
       <h4>Desayuno:</h4>
@@ -87,6 +88,11 @@
         {% endfor %}
       </ul>
 
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="button-modificar" name="generate_meals">Generar Recetas</button>
+    </form>
+    
     </div>
     
     </section>

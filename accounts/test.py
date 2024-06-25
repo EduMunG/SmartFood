@@ -2,7 +2,6 @@ from .utility import get_Vector
 import random
 import math
 
-random.seed(11)
 
 ### Transform the individual into a list of vectors ###
 def t(individual):
@@ -20,7 +19,7 @@ def objective_Function(objectiveVector, individual):
 def initialize_Population(tamPopulation, num_meals, objectiveVector):
     population = []
     for _ in range(tamPopulation):
-        individual = [random.randint(1, 1813) for _ in range(num_meals)]
+        individual = [random.randint(1, 1710) for _ in range(num_meals)]
         vector = t(individual)
         fitness = objective_Function(objectiveVector, vector)
         population.append([individual, fitness])
@@ -62,7 +61,7 @@ def mutation(sons, probMutation):
     for son in sons:
         for i in range(len(son[0])):
             if random.uniform(0, 1) < probMutation:
-                son[0][i] = random.randint(1, 1812)
+                son[0][i] = random.randint(1, 1710)
 
 
 ### Elitism ###
@@ -83,5 +82,3 @@ def genetic(objectiveVector, numMeals, tamPopulation, probCrossover, probMutatio
 
     return population[0][0]
 
-
-genetic([20, 0, 0, 0], 3, 100, 0.9, 0.3, 100)

@@ -41,29 +41,28 @@ def user_login(request):
 
 @login_required
 def home(request):
-    if request.user.is_authenticated:
-        user = request.user
-        # Obtener el perfil del usuario
-        user_profile = get_object_or_404(UserProfile, user=user)
-        # Pasar los datos del perfil al contexto
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
+
+    if request.method == 'POST' and 'generate_meals' in request.POST:
         meals = make_meal(user_profile)
-
-        context = {
-            'user': user,
-            'fa': user_profile.fa,
-            'kg': user_profile.kg,
-            'edad': user_profile.edad,
-            'objetivo': user_profile.objetivo,
-            'desayuno': meals[0],
-            'colacion':meals[1],
-            'comida': meals[2],
-            'cena': meals[3],
-
-        }
-        return render(request, 'accounts/home.html', context)
+        messages.success(request, 'Recetas generadas correctamente.')
     else:
-        return redirect('login')
+        meals = [[], [], [], []]  # Valores predeterminados si no se generan comidas
 
+    context = {
+        'user': user,
+        'fa': user_profile.fa,
+        'kg': user_profile.kg,
+        'edad': user_profile.edad,
+        'objetivo': user_profile.objetivo,
+        'desayuno': meals[0],
+        'colacion': meals[1],
+        'comida': meals[2],
+        'cena': meals[3],
+    }
+
+    return render(request, 'accounts/home.html', context)
 
  
 
@@ -216,6 +215,7 @@ def info(request):
     return render(request, 'accounts/info.html')
 
 
+@login_required
 def make_meal(user):
     bets_foods = []
 

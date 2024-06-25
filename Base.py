@@ -32,3 +32,22 @@ conn.commit()
 # Cerrar la conexión
 conn.close()
 
+
+# import sqlite3
+
+# # Conectar a la base de datos
+# conn = sqlite3.connect('db.sqlite3')
+# cursor = conn.cursor()
+
+# # Borrar el registro con index = 4
+# sql_delete = '''
+#     DELETE FROM accounts_food
+#     WHERE "index" = ?
+# '''
+# cursor.execute(sql_delete, (428,))
+
+# # Confirmar la transacción
+# conn.commit()
+
+# # Cerrar la conexión
+# conn.close()

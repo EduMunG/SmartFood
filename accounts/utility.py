@@ -3,10 +3,6 @@ import math
 from .models import Food
 
 def get_Vector(index):
-    if index == 1813:
-        print(f"Detenido en el índice: {index}")
-        return [254.28, 42.85, 6.66, 5.71]
-    
     try:
         food = Food.objects.get(index=index)
         # print(f'{food.energ_kal}, {food.lipid_tot}, {food.carbohydrt}, {food.proteina}')
